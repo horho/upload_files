@@ -1,10 +1,11 @@
 
-function route(pathname) {
+function route(handle, pathname) {
   console.log("About to route a request for " + pathname);
-  if(pathname === "/admin") {
-    return admin(pathname); 
-  }
-  return "Hello World!";
+	if(typeof handle[pathname] === 'function') {
+		handle[pathname]();
+	} else {
+		console.log("No request handler found for " + pathname);
+	}
 }
 
 exports.route = route;
